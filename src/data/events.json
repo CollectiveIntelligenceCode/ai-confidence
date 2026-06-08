@@ -1,0 +1,45 @@
+[
+  {
+    "id": "ai-day-london-2026",
+    "slug": "ai-day-london-2026",
+    "title": "AI Day London 2026",
+    "date": "2026-06-15",
+    "time": "09:00",
+    "duration": "8 hours",
+    "location": "ExCel London",
+    "city": "London",
+    "country": "UK",
+    "description": "A full day conference exploring AI automation, machine learning, and practical applications for business.",
+    "longDescription": "Join industry leaders and practitioners for an in-depth exploration of AI technologies shaping the future. This event features keynote presentations, hands-on workshops, panel discussions, and networking opportunities.",
+    "image": "/images/ai-day-london.jpg",
+    "tags": ["AI", "Automation", "Machine Learning", "London"],
+    "featured": true,
+    "capacity": 500,
+    "registrationUrl": "https://aiday.solvedtogether.co.uk/register",
+    "attendees": [
+      {
+        "name": "Chris Bradshaw",
+        "role": "Founder, AI Confidence",
+        "image": "/images/chris-bradshaw.jpg"
+      }
+    ],
+    "schedule": [
+      {
+        "time": "09:00",
+        "title": "Registration & Breakfast",
+        "description": "Welcome reception"
+      },
+      {
+        "time": "09:30",
+        "title": "Opening Keynote",
+        "speaker": "Chris Bradshaw",
+        "description": "The Future of AI Automation"
+      },
+      {
+        "time": "10:30",
+        "title": "Break",
+        "description": "Networking & refreshments"
+      }
+    ]
+  }
+]
