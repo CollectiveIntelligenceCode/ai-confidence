@@ -1,12 +1,13 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/home/Hero';
 import ConfidenceGap from '@/components/home/ConfidenceGap';
-import TheStory from '@/components/home/TheStory';
+import ConfidenceJourney from '@/components/home/ConfidenceJourney';
+import EntryPoints from '@/components/home/EntryPoints';
 import Framework from '@/components/home/Framework';
-import HumanAI from '@/components/home/HumanAI';
-import EventSection from '@/components/home/EventSection';
-import Testimonials from '@/components/home/Testimonials';
+import CommunityCards from '@/components/home/CommunityCards';
+import WhyConfidence from '@/components/home/WhyConfidence';
 import Resources from '@/components/home/Resources';
+import Testimonials from '@/components/home/Testimonials';
 import FinalCTA from '@/components/home/FinalCTA';
 import Footer from '@/components/home/Footer';
 
@@ -16,12 +17,13 @@ export default function Home() {
       <Navigation />
       <Hero />
       <ConfidenceGap />
-      <TheStory />
+      <ConfidenceJourney />
+      <EntryPoints />
       <Framework />
-      <HumanAI />
-      <EventSection />
-      <Testimonials />
+      <CommunityCards />
+      <WhyConfidence />
       <Resources />
+      <Testimonials />
       <FinalCTA />
       <Footer />
     </>

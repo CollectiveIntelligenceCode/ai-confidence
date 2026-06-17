@@ -2,29 +2,28 @@ import FadeIn from '@/components/FadeIn';
 
 const pillars = [
   {
-    n: '01',
-    title: 'Confidence',
-    desc: 'The foundation. Before tools, before strategy — leaders need the psychological safety to begin. We build it deliberately.',
+    title: 'People',
+    desc: 'Mindset. Skills. Confidence.',
+    detail: 'AI adoption starts with people. We build the mindset, skills and confidence needed to embrace change rather than resist it.',
+    pos: 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',
   },
   {
-    n: '02',
-    title: 'Clarity',
-    desc: 'Cutting through the noise. Identifying where AI creates real leverage in your specific context, team, and industry.',
+    title: 'Data',
+    desc: 'Quality. Context. Governance.',
+    detail: 'AI is only as good as the data that feeds it. We help organisations understand, prepare and govern their data for AI use.',
+    pos: 'top-1/2 right-0 translate-x-1/2 -translate-y-1/2',
   },
   {
-    n: '03',
-    title: 'Capability',
-    desc: 'Practical skills built in real time. Not theoretical. Not a slide deck. Hands-on capability that transfers immediately.',
+    title: 'Technology',
+    desc: 'Tools. Automation. Enablement.',
+    detail: 'The right tools, selected and implemented for your context — not the most hyped ones. Practical, purposeful, enabling.',
+    pos: 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2',
   },
   {
-    n: '04',
-    title: 'Action',
-    desc: 'A 90-day roadmap. Specific, sequenced, and designed for your organisation\'s pace and risk appetite.',
-  },
-  {
-    n: '05',
-    title: 'Transformation',
-    desc: 'The long game. Embedding AI into how you think, operate, and lead — not as a tool, but as a mindset.',
+    title: 'Process',
+    desc: 'Design. Systems. Workflows.',
+    detail: 'AI must be embedded in how work actually happens. We redesign workflows and operating models to make AI a natural part of every day.',
+    pos: 'top-1/2 left-0 -translate-x-1/2 -translate-y-1/2',
   },
 ];
 
@@ -35,28 +34,88 @@ export default function Framework() {
 
         <FadeIn>
           <p className="text-[#D4AF37] text-[10px] tracking-[0.35em] uppercase font-sans mb-4">The Approach</p>
-          <h2 className="font-serif text-[clamp(2.2rem,5vw,4rem)] text-[#111111] mb-16 lg:mb-20 max-w-sm leading-tight">
-            AI Confidence Framework
+          <h2 className="font-serif text-[clamp(2.2rem,5vw,4rem)] text-[#111111] mb-4 max-w-sm leading-tight">
+            The AI Confidence Framework
           </h2>
+          <div className="w-8 h-px bg-[#D4AF37] mb-16 lg:mb-20" />
         </FadeIn>
 
-        <div className="divide-y divide-black/8">
-          {pillars.map((pillar, i) => (
-            <FadeIn key={i} delay={i * 80}>
-              <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-16 py-8 lg:py-10 group">
-                <span className="text-[#D4AF37] font-sans text-[10px] tracking-[0.3em] uppercase w-8 shrink-0 mt-1">
-                  {pillar.n}
-                </span>
-                <h3 className="font-serif text-2xl lg:text-3xl text-[#111111] md:w-44 shrink-0 leading-tight group-hover:text-[#D4AF37] transition-colors duration-300">
-                  {pillar.title}
-                </h3>
-                <p className="text-[#888888] text-sm leading-relaxed font-sans max-w-lg">
-                  {pillar.desc}
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          {/* Left — visual system */}
+          <FadeIn delay={100} direction="none">
+            <div className="relative mx-auto" style={{ width: '320px', height: '320px' }}>
+              {/* Outer ring */}
+              <div className="absolute inset-0 rounded-full border border-[#D4AF37]/20" />
+              {/* Inner ring */}
+              <div className="absolute inset-12 rounded-full border border-[#D4AF37]/30" />
+              {/* Centre */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-[#D4AF37] mx-auto flex items-center justify-center mb-2">
+                    <span className="text-[#111111] text-[10px] font-sans tracking-[0.12em] uppercase font-semibold">Human</span>
+                  </div>
+                  <p className="text-[#888888] text-[10px] font-sans tracking-wide">at the centre</p>
+                </div>
               </div>
-            </FadeIn>
-          ))}
+              {/* Pillar nodes */}
+              {/* Top — People */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-6 text-center">
+                <div className="w-10 h-10 rounded-full bg-[#111111] border border-[#D4AF37]/40 flex items-center justify-center mx-auto mb-1.5">
+                  <span className="text-white text-[9px] font-sans">P</span>
+                </div>
+                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">People</p>
+              </div>
+              {/* Right — Data */}
+              <div className="absolute top-1/2 right-0 translate-x-6 -translate-y-1/2 text-center">
+                <div className="w-10 h-10 rounded-full bg-[#111111] border border-[#D4AF37]/40 flex items-center justify-center mx-auto mb-1.5">
+                  <span className="text-white text-[9px] font-sans">D</span>
+                </div>
+                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">Data</p>
+              </div>
+              {/* Bottom — Technology */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-6 text-center">
+                <div className="w-10 h-10 rounded-full bg-[#111111] border border-[#D4AF37]/40 flex items-center justify-center mx-auto mb-1.5">
+                  <span className="text-white text-[9px] font-sans">T</span>
+                </div>
+                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">Technology</p>
+              </div>
+              {/* Left — Process */}
+              <div className="absolute top-1/2 left-0 -translate-x-6 -translate-y-1/2 text-center">
+                <div className="w-10 h-10 rounded-full bg-[#111111] border border-[#D4AF37]/40 flex items-center justify-center mx-auto mb-1.5">
+                  <span className="text-white text-[9px] font-sans">Pr</span>
+                </div>
+                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">Process</p>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Right — pillar details */}
+          <div className="divide-y divide-black/8">
+            {pillars.map((pillar, i) => (
+              <FadeIn key={i} delay={i * 80}>
+                <div className="py-7 group">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-serif text-xl lg:text-2xl text-[#111111] group-hover:text-[#D4AF37] transition-colors duration-300 leading-tight">
+                      {pillar.title}
+                    </h3>
+                    <span className="text-[#D4AF37] text-[10px] font-sans tracking-wide">— {pillar.desc}</span>
+                  </div>
+                  <p className="text-[#888888] text-sm leading-relaxed font-sans">{pillar.detail}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
         </div>
+
+        <FadeIn delay={300}>
+          <div className="mt-16 lg:mt-20 border-t border-black/8 pt-10 max-w-2xl">
+            <p className="font-serif italic text-[#888888] text-lg lg:text-xl leading-relaxed">
+              AI confidence is built when people, process, technology and data evolve together.
+            </p>
+          </div>
+        </FadeIn>
 
       </div>
     </section>

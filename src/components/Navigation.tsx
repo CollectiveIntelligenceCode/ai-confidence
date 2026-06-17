@@ -2,6 +2,15 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+const links = [
+  { label: 'Framework', href: '#framework' },
+  { label: 'Digital Cohort', href: '#entry-points' },
+  { label: 'Leaders', href: '#entry-points' },
+  { label: 'Organisations', href: '#entry-points' },
+  { label: 'Community', href: '#community' },
+  { label: 'Resources', href: '#resources' },
+];
+
 export default function Navigation() {
   const [open, setOpen] = useState(false);
 
@@ -15,23 +24,19 @@ export default function Navigation() {
             <span className="w-1 h-1 rounded-full bg-[#D4AF37] group-hover:scale-150 transition-transform duration-300" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#framework" className="text-[10px] tracking-[0.2em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans">
-              Framework
-            </Link>
-            <Link href="#events" className="text-[10px] tracking-[0.2em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans">
-              Events
-            </Link>
-            <Link href="#resources" className="text-[10px] tracking-[0.2em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans">
-              Resources
-            </Link>
-            <Link href="#events" className="text-[10px] tracking-[0.2em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-2.5 hover:bg-[#D4AF37] hover:text-white transition-all duration-300 font-sans">
-              Reserve Your Place
+          <div className="hidden lg:flex items-center gap-7">
+            {links.map(l => (
+              <Link key={l.label} href={l.href} className="text-[10px] tracking-[0.18em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans">
+                {l.label}
+              </Link>
+            ))}
+            <Link href="#entry-points" className="text-[10px] tracking-[0.18em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-2.5 hover:bg-[#D4AF37] hover:text-white transition-all duration-300 font-sans whitespace-nowrap">
+              Find Your Path
             </Link>
           </div>
 
           <button
-            className="md:hidden flex flex-col gap-1.5 p-1"
+            className="lg:hidden flex flex-col gap-1.5 p-1"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -42,13 +47,15 @@ export default function Navigation() {
         </div>
       </div>
 
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? 'max-h-72' : 'max-h-0'}`}>
+      <div className={`lg:hidden overflow-hidden transition-all duration-300 ${open ? 'max-h-96' : 'max-h-0'}`}>
         <div className="bg-white border-t border-black/5 px-6 py-6 space-y-5">
-          <Link href="#framework" className="block text-[10px] tracking-[0.2em] uppercase text-[#888] font-sans" onClick={() => setOpen(false)}>Framework</Link>
-          <Link href="#events" className="block text-[10px] tracking-[0.2em] uppercase text-[#888] font-sans" onClick={() => setOpen(false)}>Events</Link>
-          <Link href="#resources" className="block text-[10px] tracking-[0.2em] uppercase text-[#888] font-sans" onClick={() => setOpen(false)}>Resources</Link>
-          <Link href="#events" className="block text-center text-[10px] tracking-[0.2em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-3 font-sans" onClick={() => setOpen(false)}>
-            Reserve Your Place
+          {links.map(l => (
+            <Link key={l.label} href={l.href} className="block text-[10px] tracking-[0.2em] uppercase text-[#888] font-sans" onClick={() => setOpen(false)}>
+              {l.label}
+            </Link>
+          ))}
+          <Link href="#entry-points" className="block text-center text-[10px] tracking-[0.2em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-3 font-sans" onClick={() => setOpen(false)}>
+            Find Your Path
           </Link>
         </div>
       </div>
