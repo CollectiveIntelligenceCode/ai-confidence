@@ -1,7 +1,9 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/home/Hero';
 import ConfidenceGap from '@/components/home/ConfidenceGap';
+import ProblemFirst from '@/components/home/ProblemFirst';
 import ConfidenceJourney from '@/components/home/ConfidenceJourney';
+import PhilosophyQuote from '@/components/home/PhilosophyQuote';
 import EntryPoints from '@/components/home/EntryPoints';
 import Framework from '@/components/home/Framework';
 import CommunityCards from '@/components/home/CommunityCards';
@@ -17,7 +19,9 @@ export default function Home() {
       <Navigation />
       <Hero />
       <ConfidenceGap />
+      <ProblemFirst />
       <ConfidenceJourney />
+      <PhilosophyQuote />
       <EntryPoints />
       <Framework />
       <CommunityCards />

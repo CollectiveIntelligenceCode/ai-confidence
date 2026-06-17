@@ -9,8 +9,8 @@ const pillars = [
   },
   {
     title: 'Data',
-    desc: 'Quality. Context. Governance.',
-    detail: 'AI is only as good as the data that feeds it. We help organisations understand, prepare and govern their data for AI use.',
+    desc: 'Quality. Context. Confidence.',
+    detail: 'AI is changing how organisations think about data. The challenge is no longer simply cleaning data — it is understanding what data matters, what can be generated, what can be enriched and how to use it responsibly. We help organisations build practical data confidence so they can move faster, reduce waste and make better decisions.',
     pos: 'top-1/2 right-0 translate-x-1/2 -translate-y-1/2',
   },
   {
