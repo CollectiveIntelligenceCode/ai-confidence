@@ -16,9 +16,9 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "AI Confidence — More Freedom. More Impact. More Life.",
+  title: "AI Confidence — Future-proof your business through confident AI adoption.",
   description:
-    "Most organisations don't have an AI problem. They have a confidence problem. AI Confidence helps leaders and organisations move from uncertainty to action.",
+    "Most organisations don't have an AI problem. They have a confidence problem. We help people, teams and organisations build the capability, confidence and operating models needed to thrive in an AI-enabled future.",
 };
 
 export default function RootLayout({
