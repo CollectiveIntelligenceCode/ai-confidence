@@ -2,9 +2,9 @@ import FadeIn from '@/components/FadeIn';
 
 const pillars = [
   {
-    title: 'People',
-    desc: 'Mindset. Skills. Confidence.',
-    detail: 'AI adoption starts with people. We build the mindset, skills and confidence needed to embrace change rather than resist it.',
+    title: 'Ethics',
+    desc: 'Responsibility. Security. Trust.',
+    detail: 'Responsible AI is not a constraint — it is a competitive advantage. We help organisations embed ethical thinking, security practices and governance into how they adopt and use AI, so confidence is built on solid foundations.',
     pos: 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',
   },
   {
@@ -59,12 +59,12 @@ export default function Framework() {
                 </div>
               </div>
               {/* Pillar nodes */}
-              {/* Top — People */}
+              {/* Top — Ethics */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-6 text-center">
                 <div className="w-10 h-10 rounded-full bg-[#111111] border border-[#D4AF37]/40 flex items-center justify-center mx-auto mb-1.5">
-                  <span className="text-white text-[9px] font-sans">P</span>
+                  <span className="text-white text-[9px] font-sans">E</span>
                 </div>
-                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">People</p>
+                <p className="text-[#111111] text-[10px] font-sans tracking-[0.1em] uppercase whitespace-nowrap">Ethics</p>
               </div>
               {/* Right — Data */}
               <div className="absolute top-1/2 right-0 translate-x-6 -translate-y-1/2 text-center">
@@ -112,7 +112,7 @@ export default function Framework() {
         <FadeIn delay={300}>
           <div className="mt-16 lg:mt-20 border-t border-black/8 pt-10 max-w-2xl">
             <p className="font-serif italic text-[#888888] text-lg lg:text-xl leading-relaxed">
-              AI confidence is built when people, process, technology and data evolve together.
+              AI confidence is built when ethics, data, technology and process evolve together — with the human always at the centre.
             </p>
           </div>
         </FadeIn>
