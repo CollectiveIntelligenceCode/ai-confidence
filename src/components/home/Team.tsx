@@ -4,7 +4,7 @@ import FadeIn from '@/components/FadeIn';
 const team = [
   {
     name: 'Chris Bradshaw',
-    company: 'AI Strategy & Executive Workflows',
+    company: 'AI Strategy &\nExecutive Workflows',
     initials: 'CB',
     photo: 'https://aiday.solvedtogether.co.uk/Chris%20Bradshaw%20Headshot.jpg',
     photoStyle: { objectPosition: 'center top' },
@@ -12,7 +12,7 @@ const team = [
   },
   {
     name: 'Rujuta Singh',
-    company: 'Enterprise Transformation & AI Adoption',
+    company: 'Enterprise Transformation &\nAI Adoption',
     initials: 'RS',
     photo: 'https://aiday.solvedtogether.co.uk/Rujuta%20Singh.jpg',
     photoStyle: { objectPosition: 'center top' },
@@ -20,11 +20,11 @@ const team = [
   },
   {
     name: 'Lukáš Svěcený',
-    company: 'Product Discovery & Facilitation',
+    company: 'Product Discovery &\nFacilitation',
     initials: 'LŠ',
     photo: '/lukas-sveceny.jpg',
     photoStyle: { objectPosition: 'center 10%', transform: 'scale(1.5)', transformOrigin: 'center 20%' },
-    bio: 'Marketing, CX, and innovation leader with 20+ years across corporates, startups, and innovation agencies. Having run strategic workshops and innovation projects in telecoms, banking, insurance, and automotive, he helps leaders and teams navigate AI-driven change with confidence — turning hype into strategy and strategy into real outcomes.',
+    bio: 'Marketing, CX, and innovation leader with 20+ years across corporates, startups, and innovation agencies. Ex-strategist at global innovation consultancies, Lukáš has designed and facilitated transformation programmes and strategic workshops for organisations across telecoms, banking, insurance, automotive and the public sector. His specialism is turning complex, high-stakes decisions into clear direction — rapidly. He helps leaders and teams cut through the noise of AI adoption, moving from expensive guesses and endless discussion to validated strategy and measurable outcomes.',
   },
 ];
 
@@ -65,7 +65,7 @@ export default function Team() {
                 <h3 className="font-serif text-xl text-[#111111] leading-tight mb-1">
                   {person.name}
                 </h3>
-                <p className="text-[#D4AF37] text-[10px] font-sans tracking-[0.2em] uppercase mb-6">
+                <p className="text-[#D4AF37] text-[10px] font-sans tracking-[0.2em] uppercase mb-6 whitespace-pre-line leading-relaxed">
                   {person.company}
                 </p>
 
