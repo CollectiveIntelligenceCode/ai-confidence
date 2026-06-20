@@ -4,6 +4,7 @@ import ConfidenceGap from '@/components/home/ConfidenceGap';
 import ProblemFirst from '@/components/home/ProblemFirst';
 import ConfidenceJourney from '@/components/home/ConfidenceJourney';
 import PhilosophyQuote from '@/components/home/PhilosophyQuote';
+import EventSection from '@/components/home/EventSection';
 import EntryPoints from '@/components/home/EntryPoints';
 import Framework from '@/components/home/Framework';
 import CommunityCards from '@/components/home/CommunityCards';
@@ -22,6 +23,7 @@ export default function Home() {
       <ConfidenceGap />
       <ProblemFirst />
       <ConfidenceJourney />
+      <EventSection />
       <PhilosophyQuote />
       <EntryPoints />
       <Framework />
