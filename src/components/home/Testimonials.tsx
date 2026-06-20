@@ -16,6 +16,21 @@ const testimonials = [
     name: 'COO',
     company: 'Technology, Global',
   },
+  {
+    quote: 'We\'ve run AI pilots before. This was the first time we left with a clear answer to the question our board keeps asking: where is the actual ROI?',
+    name: 'Chief Transformation Officer',
+    company: 'Insurance, Europe',
+  },
+  {
+    quote: 'My leadership team came in sceptical and left energised. What landed was the shift from "AI as a tool" to "AI as a thinking partner." That reframe changed everything.',
+    name: 'Group CEO',
+    company: 'Professional Services, UK',
+  },
+  {
+    quote: 'I\'ve sat through a lot of AI presentations. This was the first one where I actually changed how I work by the time I got back to my desk.',
+    name: 'Chief People Officer',
+    company: 'Retail, Global',
+  },
 ];
 
 export default function Testimonials() {

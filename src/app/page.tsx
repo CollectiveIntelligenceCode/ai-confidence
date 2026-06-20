@@ -8,6 +8,7 @@ import EntryPoints from '@/components/home/EntryPoints';
 import Framework from '@/components/home/Framework';
 import CommunityCards from '@/components/home/CommunityCards';
 import WhyConfidence from '@/components/home/WhyConfidence';
+import Team from '@/components/home/Team';
 import Resources from '@/components/home/Resources';
 import Testimonials from '@/components/home/Testimonials';
 import FinalCTA from '@/components/home/FinalCTA';
@@ -26,6 +27,7 @@ export default function Home() {
       <Framework />
       <CommunityCards />
       <WhyConfidence />
+      <Team />
       <Resources />
       <Testimonials />
       <FinalCTA />
