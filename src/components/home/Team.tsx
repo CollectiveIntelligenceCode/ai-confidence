@@ -8,7 +8,7 @@ const team = [
     initials: 'CB',
     photo: 'https://aiday.solvedtogether.co.uk/Chris%20Bradshaw%20Headshot.jpg',
     photoStyle: { objectPosition: 'center top' },
-    bio: '22 years in technology and digital strategy. Starting in tech at 21, running companies by his late twenties. Ex-Global Strategy Director at leading transformation agencies, Enterprise AI Partner at Board of Innovation, and founder of Collective Intelligence. Chris has worked with senior leaders at organisations including KPMG, BMW and Selfridges on AI adoption and decision-making strategy. He specialises in building personal AI workflows for CXOs and board members — and has a rare ability to make the complex feel immediately usable.',
+    bio: '22 years in technology and digital strategy. Ex-CEO for agency groups and Global Strategy Director at leading transformation agencies, Enterprise AI Partner at Board of Innovation, and founder of Collective Intelligence. Chris has worked with senior leaders at organisations including KPMG, BMW and Selfridges on AI adoption and decision-making strategy. He specialises in building personal AI workflows for CXOs and board members, with a rare ability to make the complex feel immediately usable.',
   },
   {
     name: 'Rujuta Singh',
@@ -16,7 +16,7 @@ const team = [
     initials: 'RS',
     photo: 'https://aiday.solvedtogether.co.uk/Rujuta%20Singh.jpg',
     photoStyle: { objectPosition: 'center top' },
-    bio: 'Over two decades leading large-scale enterprise transformation in Fortune 500 companies across insurance, banking, PE, public sector, education, real estate, and more. Ex-PwC, ex-Accenture, ex-Microsoft. Founder of Solved Together, Rujuta built it because most AI journeys start with a pilot and hope the ROI shows up. Hers start with value — combining neuroscience-based collaboration with deep transformation expertise to help leaders use AI as the lever to grow and transform, not just experiment.',
+    bio: 'Over two decades leading large-scale enterprise transformation in Fortune 500 companies across insurance, banking, PE, public sector, education, real estate, and more. Ex-PwC, ex-Accenture, ex-Microsoft. Founder of Solved Together, Rujuta built it because most AI journeys start with a pilot and hope the ROI shows up. Hers start with value, combining neuroscience-based collaboration with deep transformation expertise to help leaders use AI as the lever to grow and transform, not just experiment.',
   },
   {
     name: 'Lukáš Svěcený',
@@ -24,7 +24,7 @@ const team = [
     initials: 'LŠ',
     photo: '/lukas-sveceny.jpg',
     photoStyle: { objectPosition: 'center 10%', transform: 'scale(1.5)', transformOrigin: 'center 20%' },
-    bio: 'Marketing, CX, and innovation leader with 20+ years across corporates, startups, and innovation agencies. Ex-strategist at global innovation consultancies, Lukáš has designed and facilitated transformation programmes and strategic workshops for organisations across telecoms, banking, insurance, automotive and the public sector. His specialism is turning complex, high-stakes decisions into clear direction — rapidly. He helps leaders and teams cut through the noise of AI adoption, moving from expensive guesses and endless discussion to validated strategy and measurable outcomes.',
+    bio: 'Marketing, CX, and innovation leader with 20+ years across corporates, startups, and innovation agencies. Ex-strategist at global innovation consultancies, Lukáš has designed and facilitated transformation programmes and strategic workshops for organisations across telecoms, banking, insurance, automotive and the public sector. He helps leaders and teams cut through the noise of AI adoption, moving from expensive guesses and endless discussion to validated strategy and measurable outcomes.',
   },
 ];
 
@@ -51,8 +51,8 @@ export default function Team() {
                     <Image
                       src={person.photo}
                       alt={person.name}
-                      width={64}
-                      height={64}
+                      width={160}
+                      height={160}
                       className="w-full h-full object-cover"
                       style={person.photoStyle}
                     />
