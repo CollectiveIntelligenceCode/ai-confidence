@@ -12,7 +12,7 @@ const events = [
     date: '3rd July 2026',
     title: 'For CXOs & Board Members',
     description: 'You are the most capable person in the room — except when the topic is AI. A private day to build genuine clarity, lead any board conversation with confidence, and stop nodding along.',
-    youtubeId: 'PLACEHOLDER_2',
+    youtubeId: 'X-GWD6l5708',
   },
 ];
 
