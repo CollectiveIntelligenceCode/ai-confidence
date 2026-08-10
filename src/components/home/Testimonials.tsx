@@ -12,7 +12,7 @@ const testimonials = [
     company: 'Financial Services, UK',
   },
   {
-    quote: 'Chris has a rare gift — he makes the complex feel manageable. We left with a framework we could actually act on, that same afternoon.',
+    quote: 'Chris has a rare gift, he makes the complex feel manageable. We left with a framework we could actually act on, that same afternoon.',
     name: 'COO',
     company: 'Technology, Global',
   },

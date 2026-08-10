@@ -26,7 +26,7 @@ export default function HumanAI() {
                 AI amplifies human potential.
               </p>
               <p className="text-[#888888] text-sm leading-relaxed font-sans">
-                It doesn&apos;t replace it. The qualities that define great leadership — judgment, empathy, creativity — become more valuable, not less, in an AI-enabled world.
+                It doesn&apos;t replace it. The qualities that define great leadership, judgment, empathy, creativity, become more valuable, not less, in an AI-enabled world.
               </p>
             </div>
           </FadeIn>

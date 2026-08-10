@@ -6,12 +6,18 @@ export default function CommunityCards() {
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
 
         <FadeIn>
-          <p className="text-[#D4AF37] text-[10px] tracking-[0.35em] uppercase font-sans mb-4">Community</p>
+          <div className="flex items-center gap-4 mb-4">
+            <p className="text-[#D4AF37] text-[10px] tracking-[0.35em] uppercase font-sans">Community</p>
+            <span className="text-[9px] tracking-[0.3em] uppercase font-sans px-3 py-1 border border-white/20 text-white/40">Coming Soon</span>
+          </div>
           <h2 className="font-serif text-[clamp(2.2rem,5vw,4rem)] text-white mb-3 max-w-2xl leading-tight">
             The AI Confidence Community
           </h2>
-          <p className="text-white/35 font-sans text-sm mb-4 max-w-sm">
+          <p className="text-white/65 font-sans text-sm mb-2 max-w-sm">
             Two communities. One mission. Building confidence at every level.
+          </p>
+          <p className="text-white/55 font-sans text-xs max-w-md leading-relaxed mb-4">
+            Community membership is by invitation. Complete the AI Confidence Digital Cohort and you will be invited to join.
           </p>
           <div className="w-8 h-px bg-[#D4AF37] mb-16 lg:mb-20" />
         </FadeIn>
@@ -26,7 +32,7 @@ export default function CommunityCards() {
                 <h3 className="font-serif text-2xl lg:text-3xl text-white mb-3 leading-tight">
                   AI Confidence Collective
                 </h3>
-                <p className="text-white/40 text-[10px] tracking-[0.18em] uppercase font-sans">
+                <p className="text-white/60 text-[10px] tracking-[0.18em] uppercase font-sans">
                   For practitioners, teams and consultants
                 </p>
               </div>
@@ -50,17 +56,22 @@ export default function CommunityCards() {
                 ].map((line, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="text-[#D4AF37] mt-0.5 shrink-0 text-xs">—</span>
-                    <span className="text-white/50 text-sm font-sans leading-snug">{line}</span>
+                    <span className="text-white/70 text-sm font-sans leading-snug">{line}</span>
                   </li>
                 ))}
               </ul>
 
-              <a
-                href="#entry-points"
-                className="block text-center text-[10px] tracking-[0.25em] uppercase py-4 border border-white/20 text-white/60 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-400 font-sans"
-              >
-                Join the Collective
-              </a>
+              <div className="space-y-3">
+                <a
+                  href="/cohort"
+                  className="block text-center text-[10px] tracking-[0.25em] uppercase py-4 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-400 font-sans"
+                >
+                  Apply to Join the Community
+                </a>
+                <p className="text-white/55 text-[10px] font-sans text-center leading-relaxed">
+                  Start with the Digital Cohort, community membership follows on completion.
+                </p>
+              </div>
             </div>
           </FadeIn>
 
@@ -83,7 +94,7 @@ export default function CommunityCards() {
                     Private
                   </span>
                 </div>
-                <p className="text-white/40 text-[10px] tracking-[0.18em] uppercase font-sans mt-3">
+                <p className="text-white/60 text-[10px] tracking-[0.18em] uppercase font-sans mt-3">
                   For founders, directors, executives and board members
                 </p>
               </div>
@@ -112,12 +123,17 @@ export default function CommunityCards() {
                 ))}
               </ul>
 
-              <a
-                href="#entry-points"
-                className="block text-center text-[10px] tracking-[0.25em] uppercase py-4 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-400 font-sans"
-              >
-                Explore Leaders Circle
-              </a>
+              <div className="space-y-3">
+                <a
+                  href="/cohort"
+                  className="block text-center text-[10px] tracking-[0.25em] uppercase py-4 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-400 font-sans"
+                >
+                  Apply to Join the Community
+                </a>
+                <p className="text-white/55 text-[10px] font-sans text-center leading-relaxed">
+                  Start with the Digital Cohort, community membership follows on completion.
+                </p>
+              </div>
             </div>
           </FadeIn>
 

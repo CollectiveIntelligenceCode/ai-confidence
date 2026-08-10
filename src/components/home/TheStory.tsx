@@ -20,10 +20,10 @@ export default function TheStory() {
                 &ldquo;One year ago I rebuilt my business around an AI-first operating model.&rdquo;
               </p>
               <p className="text-white/45 text-sm leading-relaxed mb-5 font-sans">
-                Not to remove people. Not to cut costs. But to create space for what actually matters — presence, creativity, and meaningful work.
+                Not to remove people. Not to cut costs. But to create space for what actually matters, presence, creativity, and meaningful work.
               </p>
               <p className="text-white/45 text-sm leading-relaxed mb-10 font-sans">
-                Revenue increased. New products were built. Work expanded globally. And I was present — truly present — for the things that mattered most.
+                Revenue increased. New products were built. Work expanded globally. And I was present, truly present, for the things that mattered most.
               </p>
               <div className="border-t border-white/8 pt-6">
                 <p className="font-serif italic text-white/60 text-base mb-1">
@@ -32,7 +32,7 @@ export default function TheStory() {
                 <p className="font-serif italic text-[#D4AF37] text-base">It was presence.</p>
               </div>
               <p className="text-white/25 text-[10px] tracking-[0.3em] uppercase font-sans mt-6">
-                — Chris Bradshaw, Founder
+               — Chris Bradshaw, Founder
               </p>
             </div>
           </FadeIn>

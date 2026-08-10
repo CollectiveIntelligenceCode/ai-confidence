@@ -4,7 +4,7 @@ const problems = [
   {
     n: '01',
     headline: 'Leaders don\'t have clarity on AI strategy.',
-    detail: 'Without a clear direction, organisations stall — investing in tools without knowing what they\'re trying to achieve.',
+    detail: 'Without a clear direction, organisations stall, investing in tools without knowing what they\'re trying to achieve.',
   },
   {
     n: '02',

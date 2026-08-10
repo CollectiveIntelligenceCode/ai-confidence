@@ -1,14 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
+import Logo from '@/components/Logo';
 
 const links = [
-  { label: 'Framework', href: '#framework' },
-  { label: 'Digital Cohort', href: '#entry-points' },
-  { label: 'Leaders', href: '#entry-points' },
-  { label: 'Organisations', href: '#entry-points' },
-  { label: 'Community', href: '#community' },
-  { label: 'Resources', href: '#resources' },
+  { label: 'Digital Cohort', href: '/cohort' },
+  { label: 'For Leaders', href: '/leaders' },
+  { label: 'For Organisations', href: '/organisations' },
+  { label: 'AI Confidence Day', href: '/ai-confidence-day' },
+  { label: 'How We Work', href: '/how-it-works' },
 ];
 
 export default function Navigation() {
@@ -17,20 +17,21 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-black/5">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 relative">
 
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="font-serif text-[#111111] text-base tracking-tight">AI Confidence</span>
-            <span className="w-1 h-1 rounded-full bg-[#D4AF37] group-hover:scale-150 transition-transform duration-300" />
+          <Link href="/">
+            <Logo size="sm" theme="light" className="py-1" />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
             {links.map(l => (
-              <Link key={l.label} href={l.href} className="text-[10px] tracking-[0.18em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans">
+              <Link key={l.label} href={l.href} className="text-[10px] tracking-[0.18em] uppercase text-[#888] hover:text-[#111] transition-colors duration-300 font-sans whitespace-nowrap">
                 {l.label}
               </Link>
             ))}
-            <Link href="#entry-points" className="text-[10px] tracking-[0.18em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-2.5 hover:bg-[#D4AF37] hover:text-white transition-all duration-300 font-sans whitespace-nowrap">
+          </div>
+          <div className="hidden lg:flex items-center">
+            <Link href="/find-your-path" className="text-[10px] tracking-[0.18em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-2.5 hover:bg-[#D4AF37] hover:text-white transition-all duration-300 font-sans whitespace-nowrap">
               Find Your Path
             </Link>
           </div>
@@ -54,7 +55,7 @@ export default function Navigation() {
               {l.label}
             </Link>
           ))}
-          <Link href="#entry-points" className="block text-center text-[10px] tracking-[0.2em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-3 font-sans" onClick={() => setOpen(false)}>
+          <Link href="/find-your-path" className="block text-center text-[10px] tracking-[0.2em] uppercase border border-[#D4AF37] text-[#D4AF37] px-5 py-3 font-sans" onClick={() => setOpen(false)}>
             Find Your Path
           </Link>
         </div>

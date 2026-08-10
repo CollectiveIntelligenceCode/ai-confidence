@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>AI Confidence — Partner Briefing</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Password gate */
+  #gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #111;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0;
+  }
+  #gate .gate-inner {
+    width: 100%; max-width: 400px; padding: 0 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  #gate .gate-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: #D4AF37; margin-bottom: 20px;
+  }
+  #gate h1 {
+    font-family: 'Georgia', serif; font-size: 22px; font-weight: 400;
+    color: white; text-align: center; margin-bottom: 32px; line-height: 1.4;
+  }
+  #gate input {
+    width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.15);
+    color: white; font-family: 'Helvetica Neue', sans-serif; font-size: 14px;
+    padding: 14px 16px; outline: none; letter-spacing: 0.05em;
+    margin-bottom: 12px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  #gate input:focus { border-color: #D4AF37; }
+  #gate input::placeholder { color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+  #gate button {
+    width: 100%; background: #D4AF37; color: #111; border: none;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 10px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 14px; cursor: pointer; transition: opacity 0.2s;
+  }
+  #gate button:hover { opacity: 0.85; }
+  #gate .gate-error {
+    font-family: 'Helvetica Neue', sans-serif; font-size: 12px;
+    color: #c0392b; margin-top: 10px; display: none; text-align: center;
+  }
+  #gate .gate-rule { width: 40px; height: 1px; background: #D4AF37; margin-bottom: 24px; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #f9f7f4;
+    color: #111;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .header .label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #111;
+    max-width: 620px;
+    margin: 0 auto 16px;
+  }
+  .header p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #666;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Narration controls */
+  .narration-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .play-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .play-btn:hover { background: #D4AF37; color: #111; }
+  .play-btn.playing { background: #D4AF37; color: #111; }
+  .play-icon { width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 9px; border-color: transparent transparent transparent currentColor; display: inline-block; }
+  .stop-icon { width: 10px; height: 10px; background: currentColor; display: inline-block; }
+  .narration-status {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 0.1em;
+    min-width: 200px;
+    text-align: left;
+  }
+
+  /* Section highlight */
+  .section {
+    transition: all 0.4s ease;
+    border-radius: 2px;
+  }
+  .section.active {
+    outline: 2px solid #D4AF37;
+    outline-offset: 8px;
+    background: rgba(212,175,55,0.04);
+  }
+
+  /* ── STEP 1: Three partners ── */
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+    padding: 32px;
+    background: white;
+    border: 1px solid #e5e5e5;
+  }
+  .partner-card {
+    padding: 24px;
+    border: 1px solid #eee;
+    background: #fafafa;
+  }
+  .partner-card .number {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #D4AF37;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .partner-card h3 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #111;
+  }
+  .partner-card .org {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .partner-card .crm-box {
+    border: 1px dashed #ccc;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .partner-card .crm-box .crm-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 4px;
+  }
+  .partner-card .crm-box .crm-value {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    color: #555;
+  }
+  .partner-card .audience-count {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+  }
+  .stays-separate {
+    background: #111;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  /* ── Arrow section ── */
+  .arrow-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    gap: 4px;
+  }
+  .arrow-line {
+    width: 2px;
+    height: 24px;
+    background: #D4AF37;
+  }
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #D4AF37;
+  }
+  .arrow-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    background: #f9f7f4;
+    padding: 0 16px;
+  }
+
+  /* ── STEP 2: Opt-in email ── */
+  .optin-section {
+    background: white;
+    border: 1px solid #e5e5e5;
+    padding: 40px;
+    margin-bottom: 0;
+  }
+  .optin-section .step-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .optin-section h2 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .email-mockup {
+    border: 1px solid #e5e5e5;
+    max-width: 560px;
+    background: #fafafa;
+  }
+  .email-mockup .email-header {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 20px;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  .email-mockup .email-header .field {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #555;
+  }
+  .email-mockup .email-header .field .key { color: #aaa; min-width: 40px; }
+  .email-mockup .email-body {
+    padding: 24px 20px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #333;
+  }
+  .email-mockup .email-body .name-placeholder {
+    color: #D4AF37;
+    font-style: italic;
+  }
+  .email-mockup .cta-btn {
+    display: inline-block;
+    background: #111;
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .email-variants {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .email-variant {
+    border: 1px solid #e5e5e5;
+    padding: 16px;
+    background: #fafafa;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  .email-variant .from-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 6px;
+  }
+  .email-variant .from-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 2px;
+  }
+  .email-variant .from-list {
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* ── STEP 3: Shared list ── */
+  .shared-list-section {
+    background: #111;
+    color: white;
+    padding: 40px;
+    text-align: center;
+  }
+  .shared-list-section .step-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .shared-list-section h2 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .shared-list-section p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sources-grid {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .source-chip {
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 18px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6);
+  }
+  .source-chip .chip-count {
+    color: #D4AF37;
+    font-weight: 600;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+  .list-name-badge {
+    border: 1px solid #D4AF37;
+    display: inline-block;
+    padding: 16px 32px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+  }
+
+  /* ── STEP 4: What goes out ── */
+  .outbound-section {
+    background: white;
+    border: 1px solid #e5e5e5;
+    padding: 40px;
+  }
+  .outbound-section .step-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .outbound-section h2 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .outbound-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .outbound-card {
+    border: 1px solid #eee;
+    padding: 20px;
+  }
+  .outbound-card .icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .outbound-card h4 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 6px;
+  }
+  .outbound-card p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── Summary ── */
+  .summary-section {
+    border: 1px solid #D4AF37;
+    padding: 40px;
+    margin-top: 0;
+    background: white;
+  }
+  .summary-section .step-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 16px;
+  }
+  .summary-section h2 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .summary-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .summary-row .check {
+    color: #D4AF37;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .summary-row .text {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .summary-row .text strong { color: #111; }
+
+  /* Dividers between sections */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 24px 0 60px; }
+    .container { padding: 0; }
+    .header { padding: 0 20px; margin-bottom: 36px; }
+    .narration-bar { flex-direction: column; gap: 10px; padding: 0 20px; }
+    .narration-status { text-align: center; min-width: unset; }
+
+    .partners-grid,
+    .email-variants,
+    .outbound-grid { grid-template-columns: 1fr; padding: 20px; gap: 12px; }
+
+    .optin-section,
+    .shared-list-section,
+    .outbound-section,
+    .summary-section { padding: 24px 20px; }
+
+    .email-mockup { max-width: 100%; }
+
+    .sources-grid { flex-direction: column; align-items: stretch; padding: 0 20px; }
+    .source-chip { text-align: center; }
+
+    .summary-row { gap: 12px; }
+    .summary-row .text { font-size: 13px; }
+
+    .arrow-section { padding: 16px 0; }
+    .arrow-label { font-size: 9px; }
+
+    .partner-card { padding: 20px; }
+    .email-variant { padding: 16px; }
+
+    /* Daily workflow inline-styled grids */
+    .optin-section div[style*="grid-template-columns:repeat(3"] {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .optin-section div[style*="display:flex;gap:20px"] {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Password gate -->
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-label">AI Confidence · Partner Briefing</div>
+    <div class="gate-rule"></div>
+    <h1>This document is private.</h1>
+    <input type="password" id="gateInput" placeholder="Enter password" autocomplete="off" />
+    <button onclick="checkPassword()">Enter</button>
+    <div class="gate-error" id="gateError">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="label">AI Confidence · Partner Briefing</div>
+    <h1>How we build the AI Confidence audience together.</h1>
+    <p>Each partner keeps their own CRM and client relationships. This shows how we also build a shared audience for AI Confidence — without duplicating any work.</p>
+  </div>
+
+  <!-- Narration bar -->
+  <div class="narration-bar">
+    <button class="play-btn" id="playBtn" onclick="toggleNarration()">
+      <span class="play-icon" id="playIcon"></span>
+      <span id="playLabel">Play Narration</span>
+    </button>
+    <span class="narration-status" id="narrationStatus">Click play to hear a walkthrough</span>
+  </div>
+
+  <!-- STEP 1: Three partners -->
+  <div class="section" id="section-partners">
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="number">Partner 01</div>
+        <h3>Chris Bradshaw</h3>
+        <div class="org">Collective Intelligence</div>
+        <div class="crm-box">
+          <div class="crm-label">Existing CRM / List</div>
+          <div class="crm-value">Collective Intelligence contacts, newsletter, client relationships</div>
+        </div>
+        <div class="audience-count">Built over 22 years in digital &amp; AI strategy</div>
+        <div class="stays-separate">Stays separate ✓</div>
+      </div>
+      <div class="partner-card">
+        <div class="number">Partner 02</div>
+        <h3>Rujuta Singh</h3>
+        <div class="org">Solved Together</div>
+        <div class="crm-box">
+          <div class="crm-label">Existing CRM / List</div>
+          <div class="crm-value">Solved Together contacts, enterprise transformation clients, HubSpot</div>
+        </div>
+        <div class="audience-count">Fortune 500 network, ex-PwC / Accenture / Microsoft</div>
+        <div class="stays-separate">Stays separate ✓</div>
+      </div>
+      <div class="partner-card">
+        <div class="number">Partner 03</div>
+        <h3>Lukáš Svěcený</h3>
+        <div class="org">Product Discovery &amp; Facilitation</div>
+        <div class="crm-box">
+          <div class="crm-label">Existing CRM / List</div>
+          <div class="crm-value">Innovation &amp; facilitation contacts across telecoms, banking, automotive</div>
+        </div>
+        <div class="audience-count">20+ years across corporates &amp; consultancies</div>
+        <div class="stays-separate">Stays separate ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">Step 1 — one email each</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Opt-in email -->
+  <div class="section" id="section-email">
+    <div class="optin-section">
+      <div class="step-label">The Re-permission Email</div>
+      <h2>Each partner sends one email to their own audience.</h2>
+
+      <div class="email-mockup">
+        <div class="email-header">
+          <div class="field"><span class="key">From</span><span><em>Chris Bradshaw</em> — chris@collectiveintelligence.co</span></div>
+          <div class="field"><span class="key">To</span><span>Collective Intelligence list</span></div>
+          <div class="field"><span class="key">Re</span><span>Something I've been building — want in?</span></div>
+        </div>
+        <div class="email-body">
+          <p>Hi <span class="name-placeholder">[first name]</span>,</p>
+          <br>
+          <p>I've been working with two colleagues on something new — it's called AI Confidence.</p>
+          <br>
+          <p>It's a programme for senior leaders and consultants who know AI matters but haven't found the right way in yet. We've run two sold-out events in London, and we're building on that.</p>
+          <br>
+          <p>If you'd like to hear about what we're doing — events, content, and thinking — you can subscribe below.</p>
+          <br>
+          <a class="cta-btn">Stay in the loop →</a>
+          <br>
+          <p style="font-size:12px; color:#aaa; margin-top:16px;">No obligation. Unsubscribe any time. We won't move you automatically — this is your choice.</p>
+        </div>
+      </div>
+
+      <div class="email-variants">
+        <div class="email-variant">
+          <div class="from-label">Chris sends from</div>
+          <div class="from-name">Collective Intelligence</div>
+          <div class="from-list">His consultancy audience</div>
+        </div>
+        <div class="email-variant">
+          <div class="from-label">Rujuta sends from</div>
+          <div class="from-name">Solved Together</div>
+          <div class="from-list">Her enterprise network</div>
+        </div>
+        <div class="email-variant">
+          <div class="from-label">Lukáš sends from</div>
+          <div class="from-name">His own channels</div>
+          <div class="from-list">His facilitation &amp; innovation contacts</div>
+        </div>
+      </div>
+
+      <p style="font-family:'Helvetica Neue',sans-serif; font-size:12px; color:#aaa; margin-top:20px; line-height:1.6;">
+        ✓ GDPR compliant — each person opts in voluntarily &nbsp;·&nbsp; ✓ No data is moved without consent &nbsp;·&nbsp; ✓ Each partner sends from their own brand — no surprise "AI Confidence" email landing in inboxes
+      </p>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">Those who opt in land here</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Shared list -->
+  <div class="section" id="section-list">
+    <div class="shared-list-section">
+      <div class="step-label">The Shared Audience</div>
+      <h2>One AI Confidence mailing list.</h2>
+      <p>Owned by the brand, not by any individual partner. Everyone who opts in comes here — along with anyone who signs up through the website.</p>
+
+      <div class="sources-grid">
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          Chris's audience
+        </div>
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          Rujuta's audience
+        </div>
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          Lukáš's contacts
+        </div>
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          aiconfidence.co web signups
+        </div>
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          Event attendees
+        </div>
+        <div class="source-chip">
+          <span class="chip-count">→</span>
+          Organic content &amp; posts
+        </div>
+      </div>
+
+      <div class="list-name-badge">AI Confidence Audience · hello@aiconfidence.co</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">What goes out</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- STEP 4: What goes out -->
+  <div class="section" id="section-outbound">
+    <div class="outbound-section">
+      <div class="step-label">The Outbound</div>
+      <h2>What the list receives — from one shared address.</h2>
+      <div class="outbound-grid">
+        <div class="outbound-card">
+          <div class="icon">📅</div>
+          <h4>New Events</h4>
+          <p>Announcements for upcoming AI Confidence Days — CXO, Consultants, and future formats.</p>
+        </div>
+        <div class="outbound-card">
+          <div class="icon">✍️</div>
+          <h4>Content &amp; Thinking</h4>
+          <p>Articles, frameworks, and perspectives from Chris, Rujuta, and Lukáš — published under the AI Confidence brand.</p>
+        </div>
+        <div class="outbound-card">
+          <div class="icon">🎟️</div>
+          <h4>Waitlist Updates</h4>
+          <p>Early access and cancellation notices for sold-out cohorts. The list gets first access to future dates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section" id="section-summary">
+    <div class="summary-section">
+      <div class="step-label">The Key Point</div>
+      <h2>No extra work. No merged CRMs.</h2>
+      <div class="summary-row">
+        <span class="check">—</span>
+        <span class="text"><strong>Each partner keeps their own CRM</strong> exactly as it is. Collective Intelligence contacts stay in Collective Intelligence. Solved Together clients stay in Solved Together.</span>
+      </div>
+      <div class="summary-row">
+        <span class="check">—</span>
+        <span class="text"><strong>AI Confidence has its own mailing list</strong> — separate, clean, opt-in only. It lives in Resend. Nobody has to log into a new CRM or change how they work day-to-day.</span>
+      </div>
+      <div class="summary-row">
+        <span class="check">—</span>
+        <span class="text"><strong>Enquiries from the website</strong> go into a shared HubSpot — but only AI Confidence leads. Not Solved Together clients, not Collective Intelligence clients. No overlap, no confusion.</span>
+      </div>
+      <div class="summary-row">
+        <span class="check">—</span>
+        <span class="text"><strong>One opt-in email per partner</strong> is the only action required. After that, the list grows organically through content, events, and the website.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">Day to day</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- DAILY WORKFLOW -->
+  <div class="section" id="section-daily">
+    <div class="optin-section">
+      <div class="step-label">Daily Operations</div>
+      <h2>How this works in practice — every day.</h2>
+      <p style="font-family:'Helvetica Neue',sans-serif;font-size:14px;color:#666;line-height:1.75;max-width:680px;margin-bottom:40px;">
+        The concern is a fair one: if we each have our own CRM and there is also an AI Confidence CRM, does that mean three times the admin? No. Here is exactly what each of us does day to day — and how little the AI Confidence side actually requires.
+      </p>
+
+      <div class="email-variants" style="grid-template-columns:repeat(3,1fr);margin-bottom:40px;">
+
+        <div class="email-variant" style="padding:24px;">
+          <div class="from-label">Chris — daily</div>
+          <div class="from-name" style="margin-bottom:12px;">Collective Intelligence CRM</div>
+          <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#555;line-height:1.7;">
+            Client meetings, proposals, follow-ups, invoices — all in the Collective Intelligence CRM as normal. Nothing changes. AI Confidence leads only appear here if Chris decides to cross-reference them, which is optional.
+          </div>
+        </div>
+
+        <div class="email-variant" style="padding:24px;">
+          <div class="from-label">Rujuta — daily</div>
+          <div class="from-name" style="margin-bottom:12px;">Solved Together CRM (HubSpot)</div>
+          <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#555;line-height:1.7;">
+            Enterprise clients, transformation programmes, Solved Together pipeline — all in her own HubSpot as normal. She does not need to log into the AI Confidence HubSpot unless she is personally following up on an AI Confidence enquiry.
+          </div>
+        </div>
+
+        <div class="email-variant" style="padding:24px;">
+          <div class="from-label">Lukáš — daily</div>
+          <div class="from-name" style="margin-bottom:12px;">His own tools</div>
+          <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#555;line-height:1.7;">
+            Facilitation clients, innovation projects — in whatever tools he already uses. Same as above: AI Confidence is a separate lane that does not touch his day-to-day unless he is handling an AI Confidence conversation specifically.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- The trigger flow -->
+      <div style="background:#f5f5f5;border:1px solid #e5e5e5;padding:32px;max-width:720px;">
+        <p style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#D4AF37;margin-bottom:16px;">The only trigger for the AI Confidence CRM</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #e5e5e5;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:11px;font-weight:700;color:#D4AF37;min-width:28px;padding-top:2px;">01</span>
+            <div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:13px;font-weight:600;color:#111;margin-bottom:3px;">Someone submits the form on aiconfidence.co</div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#666;">Automatic. The website creates a HubSpot contact and emails a notification to chris@collectiveintelligence.co. No one has to check a dashboard.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #e5e5e5;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:11px;font-weight:700;color:#D4AF37;min-width:28px;padding-top:2px;">02</span>
+            <div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:13px;font-weight:600;color:#111;margin-bottom:3px;">Chris gets the email and decides the next step</div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#666;">Is this a CXO who should hear from Rujuta? A consultant who needs Chris? An organisation Lukáš should talk to? Chris routes it to the right person. That conversation can happen over email — the CRM is just the record of it.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #e5e5e5;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:11px;font-weight:700;color:#D4AF37;min-width:28px;padding-top:2px;">03</span>
+            <div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:13px;font-weight:600;color:#111;margin-bottom:3px;">Whoever handles the lead logs the outcome in HubSpot</div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#666;">One note. One status update. Two minutes. This gives all three partners visibility on where every AI Confidence lead stands — without anyone having to ask.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:14px 0;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:11px;font-weight:700;color:#D4AF37;min-width:28px;padding-top:2px;">04</span>
+            <div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:13px;font-weight:600;color:#111;margin-bottom:3px;">That is it. Back to your normal day.</div>
+              <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#666;">The AI Confidence CRM is not a place any of us lives in. It is a shared record that means no lead falls through the cracks and no partner is left wondering what happened to a conversation someone else had.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:#aaa;margin-top:20px;line-height:1.6;max-width:620px;">
+        The worry is usually that a second CRM means double the admin. In practice it means about two minutes per lead — and only when a lead arrives. On quiet weeks, nobody opens it.
+      </p>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="section-divider">
+    <div class="arrow-section">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">What we record</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT SETUP -->
+  <div class="section" id="section-contact">
+    <div class="outbound-section">
+      <div class="step-label">Contact Setup in HubSpot</div>
+      <h2>What we know about every person who comes to us.</h2>
+      <p style="font-family:'Helvetica Neue',sans-serif;font-size:14px;color:#666;line-height:1.75;max-width:680px;margin-bottom:40px;">
+        Every contact in the AI Confidence HubSpot carries four pieces of information beyond their name and email. These four fields answer the questions we will always want to ask when we look back at a lead.
+      </p>
+
+      <!-- 4 property cards -->
+      <div class="outbound-grid" style="margin-bottom:40px;">
+
+        <div class="outbound-card" style="border-left:3px solid #D4AF37;">
+          <div class="icon">🏷️</div>
+          <h4>Programme Interest</h4>
+          <p style="margin-bottom:12px;">Which AI Confidence product are they interested in? Set when they submit the form — can be updated as the conversation develops.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Digital Cohort</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Leaders Day</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Organisations</span>
+          </div>
+        </div>
+
+        <div class="outbound-card" style="border-left:3px solid #D4AF37;">
+          <div class="icon">🔗</div>
+          <h4>Partner Origin</h4>
+          <p style="margin-bottom:12px;">Which brand or partner brought this person to AI Confidence? Critical for understanding whose network is converting — and for routing the conversation to the right person.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Collective Intelligence</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Solved Together</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Lukáš</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #111;color:#888;padding:4px 10px;">Direct / Organic</span>
+          </div>
+        </div>
+
+        <div class="outbound-card" style="border-left:3px solid #D4AF37;">
+          <div class="icon">📣</div>
+          <h4>Lead Source</h4>
+          <p style="margin-bottom:12px;">How did they find us? Was it organic — they saw a LinkedIn post, found us via search, came across the site? Or was it a specific campaign — an event, an email, a referral we can trace?</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Organic / LinkedIn</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Email Campaign</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Event</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #D4AF37;color:#D4AF37;padding:4px 10px;">Partner Referral</span>
+            <span style="font-family:'Helvetica Neue',sans-serif;font-size:10px;border:1px solid #111;color:#888;padding:4px 10px;">Direct</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Communication history -->
+      <div style="background:#111;color:white;padding:32px;margin-bottom:0;">
+        <p style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#D4AF37;margin-bottom:16px;">Communication History</p>
+        <h3 style="font-family:'Georgia',serif;font-size:20px;font-weight:400;color:white;margin-bottom:12px;">Every touchpoint in one place.</h3>
+        <p style="font-family:'Helvetica Neue',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:28px;max-width:580px;line-height:1.7;">
+          HubSpot logs every interaction on the contact's timeline automatically — emails sent and received, notes added, meetings booked. All three partners can see the full history of any conversation before picking it up.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);">
+          <div style="background:#111;padding:20px;">
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#D4AF37;margin-bottom:8px;">Emails</div>
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">Every email to or from the contact — including the auto-confirmation they received when they submitted the form.</div>
+          </div>
+          <div style="background:#111;padding:20px;">
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#D4AF37;margin-bottom:8px;">Notes</div>
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">Any partner can add a note — "spoke to Rujuta, interested in Leaders Day, wants to bring two colleagues." Visible to everyone immediately.</div>
+          </div>
+          <div style="background:#111;padding:20px;">
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#D4AF37;margin-bottom:8px;">Status</div>
+            <div style="font-family:'Helvetica Neue',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">New → Contacted → In conversation → Converted / Not a fit. One field that tells everyone where this lead stands without anyone having to ask.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+const GATE_PASSWORD = 'AIConfidence2026';
+
+// Password gate
+function checkPassword() {
+  const val = document.getElementById('gateInput').value;
+  if (val === GATE_PASSWORD) {
+    document.getElementById('gate').style.display = 'none';
+  } else {
+    document.getElementById('gateError').style.display = 'block';
+    document.getElementById('gateInput').value = '';
+    document.getElementById('gateInput').focus();
+  }
+}
+document.getElementById('gateInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Narration script
+const narrationScript = [
+  {
+    section: 'section-partners',
+    text: "Let's start with the three partners. Chris brings his Collective Intelligence network — 22 years of digital and AI strategy contacts. Rujuta brings her Solved Together enterprise network — Fortune 500 clients, ex-PwC, Accenture, and Microsoft connections. And Lukáš brings his facilitation and innovation contacts across corporates and consultancies. Here's the important thing: none of these lists merge. Each partner keeps their own CRM, their own client relationships, exactly as they are today. This doesn't change.",
+  },
+  {
+    section: 'section-email',
+    text: "The only action we each take is sending one email — to our own list, from our own brand. For Chris, that's from Collective Intelligence. For Rujuta, from Solved Together. For Lukáš, from his own channels. The email is simple: I've been building something with two colleagues. It's called AI Confidence. If you'd like to hear about it, click here. That's it. No automatic transfers. No surprises in anyone's inbox. Each person makes their own choice to opt in. This keeps us fully GDPR compliant — we're not moving anyone's data. We're inviting them to a new list voluntarily.",
+  },
+  {
+    section: 'section-list',
+    text: "Everyone who opts in lands in one shared place — the AI Confidence audience. This list is owned by the brand, not by any individual partner. It also grows from other sources: people who sign up through the website, event attendees, and anyone who finds us through content we post. The list lives in Resend and sends from hello at aiconfidence dot co. It belongs to AI Confidence, not to any one of our consultancies.",
+  },
+  {
+    section: 'section-outbound',
+    text: "From this shared list, we send three types of things. First, event announcements — when a new AI Confidence Day is scheduled, the list hears first. Second, content and thinking — articles and frameworks published under the AI Confidence brand, authored by Chris, Rujuta, and Lukáš. Third, waitlist updates — people on the list get early access to future dates and cancellation notices before we open publicly.",
+  },
+  {
+    section: 'section-summary',
+    text: "So to answer the concern directly: there is no extra CRM to manage. Each partner keeps their tools exactly as they are. AI Confidence has its own mailing list — separate, clean, opt-in only. Website enquiries go into a shared HubSpot, but only AI Confidence leads. Not Solved Together clients. Not Collective Intelligence clients. The only action required from each of us is one email to our existing audience. After that, the list grows on its own through content and events. That's the whole model.",
+  },
+  {
+    section: 'section-daily',
+    text: "The last question is usually the most practical one: what does this actually mean for each of us on a normal working day? The answer is very little. Chris runs his Collective Intelligence relationships in his own tools — nothing changes. Rujuta runs Solved Together in her HubSpot — nothing changes. Lukáš uses whatever he already uses — nothing changes. The AI Confidence HubSpot only becomes relevant when a lead comes in through the website. When that happens, the system automatically creates the contact and emails Chris. Chris decides who should handle it, routes it, and the person who handles it logs one brief note in HubSpot so everyone can see the status. That is two minutes, and only when a lead actually arrives. On quiet weeks, nobody opens the AI Confidence CRM at all. The concern about managing two systems is understandable — but in practice, it is one system each, plus a shared record that stops things falling through the cracks.",
+  },
+  {
+    section: 'section-contact',
+    text: "The final piece is what we actually record about each person. Beyond the basics — name, email, company, role — every contact in the AI Confidence HubSpot carries four fields that answer the questions we will always want to ask. First, programme interest: are they interested in the Digital Cohort, the Leaders Day, or an organisational programme? This is set automatically when they submit the form and updated as the conversation develops. Second, partner origin: which of our three brands brought them here? Was it someone from Chris's Collective Intelligence network, Rujuta's Solved Together contacts, Lukáš's facilitation world, or did they find us directly through organic content? This matters because it tells us whose audience is converting, and it routes the conversation to the right partner. Third, lead source: were they organic — a LinkedIn post, a search, stumbling across the website — or did they come from a specific campaign we ran, an event we attended, or a referral we can trace back? This tells us what is actually working in our marketing over time. And fourth, communication history: every email, every note, every status update is visible to all three partners on the contact's timeline. If Rujuta has a call with someone, she logs a note. Chris can see it before he follows up. No one is asking each other what happened with that person. The answer is right there.",
+  },
+];
+
+let utteranceIndex = 0;
+let isPlaying = false;
+let currentSection = null;
+
+// ── Highlight ──
+function highlightSection(id) {
+  if (currentSection) document.getElementById(currentSection)?.classList.remove('active');
+  currentSection = id;
+  if (id) {
+    const el = document.getElementById(id);
+    el?.classList.add('active');
+    el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// ── Speak step ──
+function speakStep(index) {
+  if (!isPlaying) return;
+  if (index >= narrationScript.length) {
+    highlightSection(null);
+    setPlayState(false);
+    document.getElementById('narrationStatus').textContent = 'Narration complete.';
+    utteranceIndex = 0;
+    return;
+  }
+
+  const step = narrationScript[index];
+  highlightSection(step.section);
+  document.getElementById('narrationStatus').textContent = `Step ${index + 1} of ${narrationScript.length}…`;
+
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  const utterance = new SpeechSynthesisUtterance(step.text);
+  utterance.rate = 0.92;
+  const voices = synth.getVoices();
+  const preferred = voices.find(v =>
+    v.name.includes('Daniel') || v.name.includes('Karen') ||
+    v.name.includes('Samantha') || v.name.includes('Google UK') ||
+    v.lang === 'en-GB'
+  ) || voices.find(v => v.lang.startsWith('en'));
+  if (preferred) utterance.voice = preferred;
+  utterance.onend = () => {
+    if (isPlaying) { utteranceIndex = index + 1; speakStep(utteranceIndex); }
+  };
+  synth.speak(utterance);
+}
+
+function setPlayState(playing) {
+  isPlaying = playing;
+  const btn = document.getElementById('playBtn');
+  const icon = document.getElementById('playIcon');
+  const label = document.getElementById('playLabel');
+  if (playing) {
+    btn.classList.add('playing');
+    icon.className = 'stop-icon';
+    label.textContent = 'Stop';
+  } else {
+    btn.classList.remove('playing');
+    icon.className = 'play-icon';
+    label.textContent = utteranceIndex > 0 ? 'Restart' : 'Play Narration';
+  }
+}
+
+function toggleNarration() {
+  if (isPlaying) {
+    isPlaying = false;
+    window.speechSynthesis.cancel();
+    setPlayState(false);
+    highlightSection(null);
+    document.getElementById('narrationStatus').textContent = 'Stopped. Click play to restart.';
+    utteranceIndex = 0;
+  } else {
+    window.speechSynthesis.cancel();
+    utteranceIndex = 0;
+    setPlayState(true);
+    document.getElementById('narrationStatus').textContent = 'Playing…';
+    const synth = window.speechSynthesis;
+    if (synth.getVoices().length === 0) {
+      synth.onvoiceschanged = () => speakStep(0);
+    } else {
+      speakStep(0);
+    }
+  }
+}
+</script>
+
+</body>
+</html>

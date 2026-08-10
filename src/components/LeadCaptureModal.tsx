@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-type ModalVariant = 'cohort' | 'leaders' | 'organisations';
+type ModalVariant = 'cohort' | 'leaders' | 'organisations' | 'waitlist' | 'private' | 'cohort_waitlist' | 'leaders_waitlist' | 'organisations_waitlist';
 
-const config: Record<ModalVariant, { title: string; subtitle: string; submitLabel?: string }> = {
+const config: Record<ModalVariant, { title: string; subtitle: string }> = {
   cohort: {
     title: 'Apply to Join',
     subtitle: 'Applications are reviewed to ensure the cohort remains focused, practical and high-value.',
@@ -13,8 +13,28 @@ const config: Record<ModalVariant, { title: string; subtitle: string; submitLabe
     subtitle: 'A practical leadership experience designed to help senior leaders move from AI uncertainty to action.',
   },
   organisations: {
-    title: 'Request Information',
+    title: 'Book a Discovery Call',
     subtitle: 'Tell us about your organisation and we\'ll recommend the most suitable AI Confidence pathway.',
+  },
+  waitlist: {
+    title: 'Join the Waitlist',
+    subtitle: 'Be first to know when the next AI Confidence Day is announced, before we open publicly.',
+  },
+  private: {
+    title: 'Request a Private Day',
+    subtitle: 'Bring AI Confidence to your organisation. We\'ll design a programme around your team\'s needs.',
+  },
+  cohort_waitlist: {
+    title: 'Join the Waitlist — Digital Cohort',
+    subtitle: 'Be first to know when the next cohort opens. We\'ll reach out before we open publicly.',
+  },
+  leaders_waitlist: {
+    title: 'Join the Waitlist — For Leaders',
+    subtitle: 'Be first to know when the next AI Confidence Day for Leaders is announced.',
+  },
+  organisations_waitlist: {
+    title: 'Join the Waitlist — For Organisations',
+    subtitle: 'Register your interest and we\'ll be in touch as soon as the next intake opens.',
   },
 };
 
@@ -27,6 +47,8 @@ type Props = {
 export function LeadCaptureModal({ variant, isOpen, onClose }: Props) {
   const { title, subtitle } = config[variant];
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape
@@ -43,9 +65,9 @@ export function LeadCaptureModal({ variant, isOpen, onClose }: Props) {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  // Reset submitted state when reopened
+  // Reset state when reopened
   useEffect(() => {
-    if (isOpen) setSubmitted(false);
+    if (isOpen) { setSubmitted(false); setError(null); setLoading(false); }
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -54,10 +76,26 @@ export function LeadCaptureModal({ variant, isOpen, onClose }: Props) {
     if (e.target === overlayRef.current) onClose();
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: connect to HubSpot / MailerLite
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    const form = e.currentTarget as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form));
+    try {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, variant }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? 'Something went wrong.');
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -111,8 +149,8 @@ export function LeadCaptureModal({ variant, isOpen, onClose }: Props) {
             {[
               { id: 'name', label: 'Name', type: 'text', placeholder: 'Your full name' },
               { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
-              { id: 'organisation', label: 'Organisation', type: 'text', placeholder: 'Company or team name' },
-              { id: 'role', label: 'Role', type: 'text', placeholder: 'Your title or function' },
+              { id: 'role', label: 'Job Title', type: 'text', placeholder: 'e.g. CEO, Head of HR, Director' },
+              { id: 'organisation', label: 'Company Name', type: 'text', placeholder: 'Your organisation' },
             ].map(field => (
               <div key={field.id}>
                 <label
@@ -132,12 +170,41 @@ export function LeadCaptureModal({ variant, isOpen, onClose }: Props) {
               </div>
             ))}
 
+            {/* Company size */}
+            <div>
+              <label
+                htmlFor="companySize"
+                className="block text-[10px] tracking-[0.2em] uppercase font-sans text-[#888888] mb-2"
+              >
+                Company Size
+              </label>
+              <select
+                id="companySize"
+                name="companySize"
+                required
+                defaultValue=""
+                className="w-full border border-black/12 px-4 py-3 text-sm font-sans text-[#111111] focus:outline-none focus:border-[#D4AF37] transition-colors duration-200 bg-white appearance-none"
+              >
+                <option value="" disabled>Select…</option>
+                <option value="1-10">1–10 employees</option>
+                <option value="11-50">11–50 employees</option>
+                <option value="51-250">51–250 employees</option>
+                <option value="251-1000">251–1,000 employees</option>
+                <option value="1000+">1,000+ employees</option>
+              </select>
+            </div>
+
+            {error && (
+              <p className="text-red-600 text-xs font-sans text-center">{error}</p>
+            )}
+
             <div className="pt-3">
               <button
                 type="submit"
-                className="w-full bg-[#111111] text-white text-[10px] tracking-[0.25em] uppercase font-sans py-4 hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-400"
+                disabled={loading}
+                className="w-full bg-[#111111] text-white text-[10px] tracking-[0.25em] uppercase font-sans py-4 hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Start My AI Confidence Journey
+                {loading ? 'Sending…' : 'Start My AI Confidence Journey'}
               </button>
             </div>
 

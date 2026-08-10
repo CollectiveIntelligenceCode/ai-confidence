@@ -54,7 +54,7 @@ export default function WhyConfidence() {
 
               <div className="mt-12 pt-10 border-t border-black/8">
                 <p className="text-[#888888] text-sm font-sans leading-relaxed max-w-sm">
-                  That&apos;s why every programme, workshop and community we run is designed to build confidence first — and let capability follow naturally.
+                  That&apos;s why every programme, workshop and community we run is designed to build confidence first, and let capability follow naturally.
                 </p>
               </div>
             </div>

@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
-  title: "AI Confidence — Future-proof your business through confident AI adoption.",
+  title: "AI Confidence: Build Confident Teams & AI-Ready Organisations",
   description:
-    "Most organisations don't have an AI problem. They have a confidence problem. We help people, teams and organisations build the capability, confidence and operating models needed to thrive in an AI-enabled future.",
+    "Build AI confidence across your organisation. Expert training for people, teams, and leaders to thrive in an AI-enabled future.",
   openGraph: {
-    title: "AI Confidence — Future-proof your business through confident AI adoption.",
+    title: "AI Confidence: Build Confident Teams & AI-Ready Organisations",
     description:
-      "Most organisations don't have an AI problem. They have a confidence problem. We help people, teams and organisations build the capability, confidence and operating models needed to thrive in an AI-enabled future.",
+      "Build AI confidence across your organisation. Expert training for people, teams, and leaders to thrive in an AI-enabled future.",
     url: "https://aiconfidence.co",
     siteName: "AI Confidence",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "AI Confidence" }],
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Confidence — Future-proof your business through confident AI adoption.",
+    title: "AI Confidence: Build Confident Teams & AI-Ready Organisations",
     description:
-      "Most organisations don't have an AI problem. They have a confidence problem.",
+      "Build AI confidence across your organisation. Expert training for people, teams, and leaders.",
     images: ["/opengraph-image"],
   },
 };
@@ -50,11 +50,86 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AI Confidence",
+    "url": "https://aiconfidence.co",
+    "description": "AI confidence-building courses and programmes for people, teams, and organisations",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "url": "https://aiconfidence.co"
+    }
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://aiconfidence.co",
+    "name": "AI Confidence",
+    "description": "Build AI confidence across your organisation"
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://aiconfidence.co"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "How It Works",
+        "item": "https://aiconfidence.co/how-it-works"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Digital Cohort",
+        "item": "https://aiconfidence.co/cohort"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "For Leaders",
+        "item": "https://aiconfidence.co/leaders"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "For Organisations",
+        "item": "https://aiconfidence.co/organisations"
+      }
+    ]
+  };
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${playfairDisplay.variable} h-full`}
     >
+      <head>
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      </head>
       <body className="min-h-full">
         {children}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-ME0LQFTXTT" strategy="afterInteractive" />

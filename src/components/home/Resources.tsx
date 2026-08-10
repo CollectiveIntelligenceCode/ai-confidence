@@ -16,7 +16,7 @@ const resources = [
   {
     type: 'Framework',
     title: 'The AI Confidence Framework',
-    desc: 'The complete framework — People, Data, Technology and Process — with Human at the centre. Built for practical application.',
+    desc: 'The complete framework, People, Data, Technology and Process, with Human at the centre. Built for practical application.',
     tag: 'Download',
   },
   {

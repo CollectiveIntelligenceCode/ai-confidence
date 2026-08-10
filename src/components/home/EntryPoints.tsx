@@ -9,17 +9,17 @@ const entries = [
   {
     n: '01',
     title: 'AI Confidence\nDigital Cohort',
-    audience: 'For Individuals, Consultants & Teams',
+    audience: 'For Leaders, CxOs, Founders & Business Owners',
     outcome: 'Build practical AI fluency and confidence.',
     learnLabel: 'You will learn',
     learn: [
       'Understanding modern AI',
       'Tool selection',
-      'Prompting and workflows',
+      'Prompting & workflows',
       'Building personal assistants',
       'Everyday productivity',
       'Content creation',
-      'Research and analysis',
+      'Research & analysis',
       'Team collaboration',
     ],
     format: ['Digital cohort', 'Community access', 'Templates & resources', 'Live sessions'],
@@ -31,7 +31,7 @@ const entries = [
   {
     n: '02',
     title: 'AI Confidence\nfor Leaders',
-    audience: 'For Founders, Directors & Senior Teams',
+    audience: 'For CxOs, Board Members & Senior Leaders',
     outcome: 'Build strategic confidence and lead AI transformation.',
     learnLabel: 'You will explore',
     learn: [
@@ -54,19 +54,20 @@ const entries = [
     n: '03',
     title: 'AI Confidence\nfor Organisations',
     audience: 'For Teams & Organisations',
-    outcome: 'Build an AI-ready workforce with the skills, confidence and training to scale AI impact.',
-    learnLabel: 'You will enable',
+    outcome: 'Build an AI-native operating model and guide confident, organisation-wide AI adoption, from strategy to workforce capability.',
+    learnLabel: 'You will build',
     learn: [
-      'AI readiness assessments',
-      'Team training programmes',
-      'Internal champions',
-      'AI fluency & capability building',
+      'AI-native operating model design',
+      'Organisation-wide adoption roadmaps',
+      'AI readiness & maturity assessments',
+      'Internal champion programmes',
+      'Team capability & fluency building',
+      'Governance, risk & change frameworks',
       'Practical use case labs',
-      'Change & adoption support',
       'Measurement & impact tracking',
     ],
     format: ['Team training', 'Live workshops', 'Certification programmes', 'Impact tracking'],
-    cta: 'Request Information',
+    cta: 'Book a Discovery Call',
     microcopy: 'Tell us about your organisation and we\'ll recommend the most suitable AI Confidence pathway.',
     modal: 'organisations' as ModalVariant,
     dark: false,
@@ -100,7 +101,7 @@ export default function EntryPoints() {
                     <h3 className={`font-serif text-2xl lg:text-3xl leading-tight mb-4 whitespace-pre-line ${entry.dark ? 'text-white' : 'text-[#111111]'}`}>
                       {entry.title}
                     </h3>
-                    <p className={`text-[10px] tracking-[0.18em] uppercase font-sans mb-4 ${entry.dark ? 'text-white/40' : 'text-[#888888]'}`}>
+                    <p className={`text-[10px] tracking-[0.18em] uppercase font-sans mb-4 ${entry.dark ? 'text-white/65' : 'text-[#666666]'}`}>
                       {entry.audience}
                     </p>
                     <p className={`text-sm leading-relaxed font-sans font-medium ${entry.dark ? 'text-white/70' : 'text-[#444444]'}`}>
@@ -117,7 +118,7 @@ export default function EntryPoints() {
                       {entry.learn.map((item, j) => (
                         <li key={j} className="flex items-start gap-3">
                           <span className="text-[#D4AF37] mt-0.5 shrink-0 text-xs">—</span>
-                          <span className={`text-sm font-sans leading-snug ${entry.dark ? 'text-white/60' : 'text-[#555555]'}`}>{item}</span>
+                          <span className={`text-sm font-sans leading-snug ${entry.dark ? 'text-white/75' : 'text-[#444444]'}`}>{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -128,7 +129,7 @@ export default function EntryPoints() {
                     <p className="text-[#D4AF37] text-[10px] tracking-[0.2em] uppercase font-sans mb-4">Format</p>
                     <div className="flex flex-wrap gap-2 pb-6">
                       {entry.format.map((f, j) => (
-                        <span key={j} className={`text-[10px] font-sans px-3 py-1.5 border tracking-wide ${entry.dark ? 'border-white/15 text-white/50' : 'border-black/12 text-[#888888]'}`}>
+                        <span key={j} className={`text-[10px] font-sans px-3 py-1.5 border tracking-wide ${entry.dark ? 'border-white/25 text-white/70' : 'border-black/12 text-[#666666]'}`}>
                           {f}
                         </span>
                       ))}
@@ -147,7 +148,7 @@ export default function EntryPoints() {
                     >
                       {entry.cta}
                     </button>
-                    <p className={`text-[11px] font-sans leading-relaxed mt-4 text-center ${entry.dark ? 'text-white/25' : 'text-[#aaaaaa]'}`}>
+                    <p className={`text-[11px] font-sans leading-relaxed mt-4 text-center ${entry.dark ? 'text-white/55' : 'text-[#777777]'}`}>
                       {entry.microcopy}
                     </p>
                   </div>

@@ -26,6 +26,14 @@ const team = [
     photoStyle: { objectPosition: 'center 10%', transform: 'scale(1.5)', transformOrigin: 'center 20%' },
     bio: 'Marketing, CX, and innovation leader with 20+ years across corporates, startups, and innovation agencies. Ex-strategist at global innovation consultancies, Lukáš has designed and facilitated transformation programmes and strategic workshops for organisations across telecoms, banking, insurance, automotive and the public sector. He helps leaders and teams cut through the noise of AI adoption, moving from expensive guesses and endless discussion to validated strategy and measurable outcomes.',
   },
+  {
+    name: 'Grant Kaufmann',
+    company: 'Secure AI Foundations &\nTechnical Architecture',
+    initials: 'GK',
+    photo: '/grant-kaufmann.jpg',
+    photoStyle: { objectPosition: 'center top' },
+    bio: 'Over 20 years as a technology and security executive, holding CTO, CISO and VP of IT roles across biotech, finance, semiconductors and telecom. Ex-CTO of Corbus Pharmaceuticals, which grew from startup to a $750M NASDAQ listing, and ex-VP of IT at AI-chip innovator Luminous Computing. He has advised institutions including Barclays Capital, Bank of America and Deutsche Bank and supported M&A integrations at Barclays Global Investors and Elenion. CISSP-certified with degrees in Computer Science and Psychology, he makes AI adoption safe to scale, turning governance, security and data integrity into the foundation for confident growth.',
+  },
 ];
 
 export default function Team() {
@@ -41,7 +49,7 @@ export default function Team() {
           <div className="w-8 h-px bg-[#D4AF37] mb-16 lg:mb-20" />
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {team.map((person, i) => (
             <FadeIn key={i} delay={i * 100}>
               <div className="bg-white border border-black/8 p-8 flex flex-col h-full">
