@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
+      <main id="main-content">
       <Hero />
       <AmplifyStatement />
       <PathwayPyramid />
@@ -77,6 +78,7 @@ export default function Home() {
       <Team />
       <CommunityCards />
       <FinalCTA />
+      </main>
       <Footer />
     </>
   );
