@@ -108,6 +108,93 @@ export default function RootLayout({
     ]
   };
 
+  const courseListSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Course",
+        "name": "AI Confidence Digital Cohort",
+        "description": "A digital cohort programme to build AI confidence across teams. Practical, actionable, and designed for real-world work.",
+        "url": "https://aiconfidence.co/cohort",
+        "provider": {
+          "@type": "Organization",
+          "name": "AI Confidence",
+          "url": "https://aiconfidence.co"
+        },
+        "educationalLevel": "Beginner to Intermediate",
+        "teaches": "AI literacy, confidence with AI tools, practical AI adoption",
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "Course",
+        "name": "AI Confidence for Leaders",
+        "description": "Leadership programme for executives and managers to build strategic AI confidence and lead AI-ready organisations.",
+        "url": "https://aiconfidence.co/leaders",
+        "provider": {
+          "@type": "Organization",
+          "name": "AI Confidence",
+          "url": "https://aiconfidence.co"
+        },
+        "educationalLevel": "Advanced",
+        "teaches": "AI strategy, leadership in AI transformation, AI-ready culture",
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "Course",
+        "name": "AI Confidence for Organisations",
+        "description": "Organisation-wide AI confidence programme. Build capability, culture, and confidence across every level of your business.",
+        "url": "https://aiconfidence.co/organisations",
+        "provider": {
+          "@type": "Organization",
+          "name": "AI Confidence",
+          "url": "https://aiconfidence.co"
+        },
+        "educationalLevel": "All Levels",
+        "teaches": "AI adoption, organisational change management, AI fluency",
+        "inLanguage": "en-GB"
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is AI Confidence?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI Confidence is a training and development programme designed to help people, teams, and organisations become confident with AI. We provide practical skills and mindset shifts for an AI-enabled future."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is AI Confidence for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI Confidence is designed for individuals, teams, leaders, and entire organisations. We have programmes tailored for every level — from first-time AI users to executives leading transformation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes AI Confidence different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unlike generic AI training, AI Confidence focuses on building real confidence — not just knowledge. Our programmes address the human side of AI adoption, helping people thrive rather than fear the technology."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I start building AI confidence?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with our How It Works page to find the right path for you. We offer three entry points: the Digital Cohort for teams, a programme For Leaders, and a comprehensive solution For Organisations."
+        }
+      }
+    ]
+  };
+
   return (
     <html
       lang="en"
@@ -128,6 +215,16 @@ export default function RootLayout({
           id="breadcrumb-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <Script
+          id="course-list-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseListSchema) }}
+        />
+        <Script
+          id="faq-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="min-h-full">

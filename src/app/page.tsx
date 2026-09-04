@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/home/Hero';
@@ -14,6 +15,11 @@ import Team from '@/components/home/Team';
 import CommunityCards from '@/components/home/CommunityCards';
 import FinalCTA from '@/components/home/FinalCTA';
 import Footer from '@/components/home/Footer';
+
+export const metadata: Metadata = {
+  title: 'AI Confidence: Future-Proof Your Business Today',
+  description: 'Build AI confidence across your people, teams, and organisation. Expert training and leadership programmes for thriving in an AI-enabled future.',
+};
 
 export default function Home() {
   return (
